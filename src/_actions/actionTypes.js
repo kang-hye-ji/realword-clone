@@ -1,0 +1,20 @@
+/* COMMON */
+export const APP_LOAD='APP_LOAD';
+export const REDIRECT='REDIRECT';
+
+
+/* HOMEPAGE */
+export const HOME_PAGE_UNLOADED='HOME_PAGE_UNLOADED';
+export const HOME_PAGE_LOADED='HOME_PAGE_LOADED';
+
+/* ASYNC */
+export const ASYNC_START='ASYNC_START';
+export const ASYNC_END='ASYNC_END';
+
+
+/* AUTH */
+export const LOGIN='LOGIN';
+export const LOGOUT='LOGOUT';
+export const REGISTER='REGISTER';
+export const REGISTER_PAGE_UNLOADED='REGISTER_PAGE_UNLOADED';
+export const UPDATE_FIELD_AUTH='UPDATE_FIELD_AUTH';
