@@ -5,8 +5,8 @@ import {
 export function onLoad(payload, token){
     return{
         type:APP_LOAD,
-        payload, 
-        token,
+        payload:payload, 
+        token:token,
         skipTracking:true
     }
 }
