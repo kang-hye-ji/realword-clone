@@ -1,11 +1,14 @@
+import "@testing-library/react/cleanup-after-each";
+import "@testing-library/jest-dom/extend-expect"
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from " @testing-library/react";
 import App from "./App";
 
-describe("<App />", () => {
-	it("matches snapshot", () => {
-		const utils = render(<App />);
-		expect(utils.container).toMatchSnapshot();
+describe("<App /> 컴포넌트 관련", () => {
+	it("잘 렌더링 되는가", () => {
+		const {getByText} = render(<App />);
+		const tagName = getByText("Popular Tags")
+		expect(tagName).toBeInTheDocument();
 	});
 	// it('shows the props correctly', () => {
 	// const utils = render(<Profile username="velopert" name="김민준" />);

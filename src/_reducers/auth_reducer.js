@@ -12,7 +12,7 @@ export default function(state={}, action){
             if(action.subtype===LOGIN || action.subtype===REGISTER){
                 return{...state, inProgress:true}
             }
-            break;
+            // break;
 
         case REGISTER_PAGE_UNLOADED:
             return{}
