@@ -24,6 +24,7 @@ function App(props) {
       Agent.setToken(token)
     }
     dispatch(onLoad(token ? Agent.Auth.current() : null, token))
+    // onLoad가 action을 타고 나서 => reduxMiddleware로 향한 후 => reducer로 이동한다.
   }, [])
 
   if(common && common.appLoaded){
