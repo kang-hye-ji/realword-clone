@@ -50,13 +50,15 @@ function App(props) {
   if (common.appLoaded) {
     return (
       <div>
-        <Header appName={common.appName} currentUser={common.currentUser} />
+        로딩됐다.
+        {/* <Header appName={common.appName} currentUser={common.currentUser} /> */}
       </div>
     );
   }
   return (
     <div>
-      <Header appName={common.appName} currentUser={common.currentUser} />
+      로딩안됐다.
+      {/* <Header appName={common.appName} currentUser={common.currentUser} /> */}
     </div>
   );
   // ** common 셀렉터에 appLoaded가 잘 받아지는지 ** //
