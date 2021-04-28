@@ -11,24 +11,31 @@ jest.mock("react-redux");
 const dispatch = jest.fn();
 // react-redux파일에 있던 임의의 함수 중 useDispatch는 .. 호출 시 dispatch를 리턴한다.
 useDispatch.mockImplementation(() => dispatch);
-test("초기에 useDispatch를 호출하는가", async () => {
-  useSelector.mockImplementation((state) => ({
-    currentUser: null,
-    token: null,
-    appLoaded: true,
-  }));
-  const AppCom = render(<App />);
-  expect(dispatch).toBeCalled();
 
-  const loadedDiv = AppCom.getByText("로딩됐다.");
-  expect(loadedDiv);
-  //   App.getByText("Popular Tags");
-  // const tagName = getByText("Popular Tags")
-  // expect(tagName).toBeInTheDocument();
-  // it('shows the props correctly', () => {
-  // const utils = render(<Profile username="velopert" name="김민준" />);
-  // utils.getByText('velopert'); // velopert 라는 텍스트를 가진 엘리먼트가 있는지 확인
-  // utils.getByText('(김민준)'); // (김민준) 이라는 텍스트를 가진 엘리먼트가 있는지 확인
-  // utils.getByText(/김/); // 정규식 /김/ 을 통과하는 엘리먼트가 있는지 확인
-  // });
+test("call 'onLoad' dispatch", async () => {
+  const common = { currentUser: null, token: null, appLoaded: true };
+  useSelector.mockImplementation((state) => common);
+  render(<App />);
+  expect(dispatch).toBeCalled();
 });
+
+test("render app by 'appLoaded'", async () => {
+  function util(common) {
+    useSelector.mockImplementation((state) => common);
+    const utils = render(<App />);
+    return utils;
+  }
+  context("loaded app ", () => {
+    const common = { currentUser: null, token: null, appLoaded: true };
+    const utils = util(common);
+    expect(utils.getByText("로딩됐다."));
+  });
+
+  context("not loaded app ", () => {
+    const common = { currentUser: null, token: null, appLoaded: false };
+    const utils = util(common);
+    expect(utils.getByText("로딩안됐다."));
+  });
+});
+
+test("", async () => {});

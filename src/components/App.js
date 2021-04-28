@@ -39,18 +39,26 @@ function App(props) {
     // action에 skipTracking 값은 왜 들어가는 건지 모르겠다 !!!
     dispatch(onLoad(token ? Agent.Auth.current() : null, token));
     // onLoad가 action을 타고 나서 => reduxMiddleware로 향한 후 => reducer로 이동한다.
+    // Auth.current()는 currentUser를 불러옴!
 
     // 이제 redux에는 currentUser, token, appLoaded:true가 저장된다.
 
     // 로그인했을 때 vs 안했을 때 에 따라서. test ??? 이게 먼저일까?
     // 내가 할 수 있는 가장 빠른 테스트를 해야하지 않을까?
-    // common selector에서 정보를 받아올거다!
   }, []);
 
   if (common.appLoaded) {
-    return <div>로딩됐다.</div>;
+    return (
+      <div>
+        <Header appName={common.appName} currentUser={common.currentUser} />
+      </div>
+    );
   }
-  return <div>로딩안됐다.</div>;
+  return (
+    <div>
+      <Header appName={common.appName} currentUser={common.currentUser} />
+    </div>
+  );
   // ** common 셀렉터에 appLoaded가 잘 받아지는지 ** //
   // if (common && common.appLoaded) {
   //   return (
