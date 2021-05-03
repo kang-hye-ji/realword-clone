@@ -10,8 +10,6 @@ import Agent from "../_actions/agent";
 import { onLoad } from "../_actions/common_actions";
 import { useDispatch, useSelector } from "react-redux";
 
-// import Profile from "../Profile";
-
 function App(props) {
   const common = useSelector((state) => state.common);
   const dispatch = useDispatch();
@@ -51,6 +49,11 @@ function App(props) {
     return (
       <div>
         <Header appName={common.appName} currentUser={common.currentUser} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+        </Switch>
       </div>
     );
   }
@@ -59,30 +62,6 @@ function App(props) {
       <Header appName={common.appName} currentUser={common.currentUser} />
     </div>
   );
-  // ** common 셀렉터에 appLoaded가 잘 받아지는지 ** //
-  // if (common && common.appLoaded) {
-  //   return (
-  //     <div>
-  //       {/* header에 props가 잘 넘어가는지 */}
-  //       <Header appName={common.appName} currentUser={common.currentUser} />
-  //       {/* <Profile username="velopert" name="김민준" /> */}
-  //       <Switch>
-  //         <Route exact path="/" component={Home} />
-  //         <Route path="/register" component={Register} />
-  //         <Route path="/login" component={Login} />
-  //       </Switch>
-  //     </div>
-  //   );
-  // } else if (common) {
-  //   {/* common일 경우에 에러가 나지는 않는지 */}
-  //   return (
-  //     <div>
-  //       <Header appName={common.appName} currentUser={common.currentUser} />
-  //     </div>
-  //   );
-  // } else {
-  //   return null;
-  // }
 }
 
 export default App;

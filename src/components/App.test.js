@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { render } from "@testing-library/react";
 import App from "./App";
 import context from "jest-plugin-context";
+import { cleanup } from "@testing-library/react";
 
 // jest는 __mocks__의 react-redux파일에 있는 애들을 mocking할거다.
 // react-redux의 애들은 jest의 임의의 함수 jest.fn();이다.
@@ -27,7 +28,7 @@ test("call 'onLoad' dispatch", async () => {
     appLoaded: true,
   };
   useSelector.mockImplementation((state) => common);
-  const utils = render(
+  render(
     <Router>
       <App />
     </Router>
@@ -35,41 +36,40 @@ test("call 'onLoad' dispatch", async () => {
   expect(dispatch).toBeCalled();
 });
 
-describe("display appName and header when logout state", () => {
-  function util(common) {
-    useSelector.mockImplementation((state) => common);
-    const utils = render(
-      <Router>
-        <App />
-      </Router>
-    );
-    return utils;
-  }
-  context("loaded app ", () => {
-    const common = {
-      ...defaultState,
-      currentUser: null,
-      appLoaded: true,
-    };
-    const utils = util(common);
-    expect(utils.getByText(common.appName.toLowerCase()));
-    expect(utils.getByText("Home"));
-    expect(utils.getByText("Sign in"));
-    expect(utils.getByText("Sign up"));
-  });
+test("loaded app", async () => {
+  const common = {
+    ...defaultState,
+    currentUser: null,
+    appLoaded: true,
+  };
+  useSelector.mockImplementation((state) => common);
+  const utils = render(
+    <Router>
+      <App />
+    </Router>
+  );
+  expect(utils.getByText(common.appName.toLowerCase()));
+  expect(utils.getByText("Home"));
+  expect(utils.getByText("Sign in"));
+  expect(utils.getByText("Sign up"));
+});
 
-  context("not loaded app ", () => {
-    const common = {
-      ...defaultState,
-      currentUser: undefined,
-      appLoaded: undefined,
-    };
-    const utils = util(common);
-    expect(utils.getAllByText(common.appName.toLowerCase()));
-    expect(utils.getAllByText("Home"));
-    expect(utils.getAllByText("Sign in"));
-    expect(utils.getAllByText("Sign up"));
-  });
+test("not loaded app", async () => {
+  const common = {
+    ...defaultState,
+    currentUser: undefined,
+    appLoaded: undefined,
+  };
+  useSelector.mockImplementation((state) => common);
+  const utils = render(
+    <Router>
+      <App />
+    </Router>
+  );
+  expect(utils.getByText(common.appName.toLowerCase()));
+  expect(utils.getByText("Home"));
+  expect(utils.getByText("Sign in"));
+  expect(utils.getByText("Sign up"));
 });
 
 test("", async () => {});
